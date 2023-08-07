@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/sunyihoo/gin-vue3-admin/server/core"
+	"github.com/sunyihoo/gin-vue3-admin/server/global"
+)
 
 //go:generate go env -w GO111MODULE=on
 //go:generate go env -w GOPROXY=https://goproxy.cn,direct
@@ -16,4 +20,6 @@ import "fmt"
 // @BasePath 					/
 func main() {
 	fmt.Println("start")
+	global.GVA_VP = core.Viper() // 初始化Viper
+
 }

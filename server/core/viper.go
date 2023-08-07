@@ -8,9 +8,9 @@ import (
 	"github.com/spf13/viper"
 	"github.com/sunyihoo/gin-vue3-admin/server/core/internal"
 	"github.com/sunyihoo/gin-vue3-admin/server/global"
+	"path/filepath"
 
 	"os"
-
 )
 
 // Viper //
@@ -26,7 +26,7 @@ func Viper(path ...string) *viper.Viper {
 				switch gin.Mode() {
 				case gin.DebugMode:
 					config = internal.ConfigDefaultFile
-					fmt.Printf("您正在使用gin模式的%s环境名称，config的路径为%s\n", gin.EnvGinMode, internal.ConfigDebugFile)
+					fmt.Printf("您正在使用gin模式的%s环境名称，config的路径为%s\n", gin.EnvGinMode, internal.ConfigDefaultFile)
 				case gin.ReleaseMode:
 					config = internal.ConfigReleaseFile
 					fmt.Printf("您正在使用gin模式的%s环境名称，config的路径为%s\n", gin.EnvGinMode, internal.ConfigReleaseFile)
@@ -57,7 +57,15 @@ func Viper(path ...string) *viper.Viper {
 
 	v.OnConfigChange(func(e fsnotify.Event) {
 		fmt.Println("config file changed:", e.Name)
-		if err = v.Unmarshal(&global.GVA_CONFIG)
+		if err = v.Unmarshal(&global.GVA_CONFIG); err != nil {
+			fmt.Println(err)
+		}
 	})
+	if err = v.Unmarshal(&global.GVA_CONFIG); err != nil {
+		fmt.Println(err)
+	}
 
+	// root 适配性，根据root位置去找对应迁移位置，保证root路径有效
+	global.GVA_CONFIG.Autocode.Root, _ = filepath.Abs("..")
+	return v
 }

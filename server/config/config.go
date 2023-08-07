@@ -22,4 +22,10 @@ type Server struct {
 	HuaweiObs  HuaWeiObs  `mapstructure:"hua-wei-obs" json:"huawei-obs"  yaml:"hua-wei-obs"`
 	TencentCos TencentCos `mapstructure:"tencent-cos" json:"tencent-cos" yaml:"tencent-cos"`
 	AwsS3      AwsS3      `mapstructure:"aws-s" json:"aws-s3" yaml:"aws-s3"`
+
+	Excel Excel `mapstructure:"excel" json:"excel" yaml:"excel"`
+	Timer Timer `mapstructure:"timer" json:"timer" yaml:"timer"`
+
+	// 跨域配置
+	Cors CORS `mapstructure:"cors" json:"cors" yaml:"cors"`
 }
