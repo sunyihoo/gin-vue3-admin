@@ -10,10 +10,16 @@ type Server struct {
 	// auto
 	Autocode Autocode `mapstructure:"autocode" json:"autocode" yaml:"autocode"`
 	// gorm
-	Mysql  Mysql           `mapstructure:"mysql" json:"mysql" yaml:"mysql"`
 	Mssql  Mssql           `mapstructure:"mssql" json:"mssql" yaml:"mssql"`
 	Pgsql  Pgsql           `mapstructure:"pgsql" json:"pgsql" yaml:"pgsql"`
 	Oracle Oracle          `mapstructure:"oracle" json:"oracle" yaml:"oracle"`
 	Sqlite Sqlite          `mapstructure:"sqlite" json:"sqlite" yaml:"sqlite"`
-	DBList []SpecializedDB `mapstructure:"db-list" json:"db-list" yaml:"db-list"`
+	DBList []SpecializedDB `mapstructure:"db-list" json:"db-list" yaml:"db-li                                                                                                                                                                                                                                                                                                                                                                                                       "`
+	// oss
+	Local      Local      `mapstructure:"local" json:"local" yaml:"local"`
+	Qiniu      Qiniu      `mapstructure:"qiniu" json:"qiniu" yaml:"qiniu"`
+	AliyunOss  AliyunOss  `mapstructure:"aliyun-oss" json:"aliyun-oss" yaml:"aliyun-oss" `
+	HuaweiObs  HuaWeiObs  `mapstructure:"hua-wei-obs" json:"huawei-obs"  yaml:"hua-wei-obs"`
+	TencentCos TencentCos `mapstructure:"tencent-cos" json:"tencent-cos" yaml:"tencent-cos"`
+	AwsS3      AwsS3      `mapstructure:"aws-s" json:"aws-s3" yaml:"aws-s3"`
 }
