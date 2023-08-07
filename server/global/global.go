@@ -1,6 +1,9 @@
 package global
 
-import "gorm.io/gorm"
+import (
+	"github.com/sunyihoo/gin-vue3-admin/server/config"
+	"gorm.io/gorm"
+)
 
 var (
 	GVA_DB     *gorm.DB
