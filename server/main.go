@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"github.com/sunyihoo/gin-vue3-admin/server/core"
 	"github.com/sunyihoo/gin-vue3-admin/server/global"
@@ -29,4 +30,16 @@ func main() {
 	global.GVA_DB = initialize.Gorm() // gorm连接数据库
 	initialize.Timer()
 	initialize.DBList()
+	if global.GVA_DB != nil {
+		initialize.RegisterTable() // 初始化表
+		// 程序结束前关闭数据库链接
+		db, _ := global.GVA_DB.DB()
+		defer func(db *sql.DB) {
+			err := db.Close()
+			if err != nil {
+				fmt.Println(err)
+			}
+		}(db)
+	}
+	core.Run
 }

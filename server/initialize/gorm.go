@@ -2,6 +2,8 @@ package initialize
 
 import (
 	"github.com/sunyihoo/gin-vue3-admin/server/global"
+	"github.com/sunyihoo/gin-vue3-admin/server/model/system"
+	"go.uber.org/zap"
 	"gorm.io/gorm"
 )
 
@@ -21,4 +23,19 @@ func Gorm() *gorm.DB {
 	default:
 		return GormMysql()
 	}
+}
+
+// RegisterTables 注册数据库表专用
+// Author SliverHorn
+func RegisterTable() {
+	db := global.GVA_DB
+	err := db.AutoMigrate(
+		//系统模块表
+		system.SysApi{},
+		system.SysUser{},
+	)
+	if err != nil {
+		global.GVA_LOG.Error("register table failed", zap.Error(err))
+	}
+	global.GVA_LOG.Info("register table success")
 }
