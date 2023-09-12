@@ -2,6 +2,7 @@ package initialize
 
 import (
 	"github.com/dzwvip/oracle"
+	"github.com/sunyihoo/gin-vue3-admin/server/config"
 	"github.com/sunyihoo/gin-vue3-admin/server/global"
 	"github.com/sunyihoo/gin-vue3-admin/server/initialize/internal"
 	"gorm.io/gorm"
@@ -28,5 +29,23 @@ func GormOracle() *gorm.DB {
 		sqlDB.SetMaxOpenConns(m.MaxOpenConns)
 		return db
 	}
+}
 
+// GormOracleByConfig 初始化Oracle数据库 通过配置文件
+func GormOracleByConfig(m config.Oracle) *gorm.DB {
+	if m.Dbname == "" {
+		return nil
+	}
+	oracleConfig := oracle.Config{
+		DSN:               m.Dsn(), // DSN data source name
+		DefaultStringSize: 191,     // string 类型字段的默认长度
+	}
+	if db, err := gorm.Open(oracle.New(oracleConfig), internal.Gorm.Config(m.Prefix, m.Singular)); err != nil {
+		return nil
+	} else {
+		sqlDB, _ := db.DB()
+		sqlDB.SetMaxIdleConns(m.MaxIdleConns)
+		sqlDB.SetMaxOpenConns(m.MaxOpenConns)
+		return db
+	}
 }
