@@ -2,6 +2,7 @@ package initialize
 
 import (
 	"github.com/sunyihoo/gin-vue3-admin/server/global"
+	"github.com/sunyihoo/gin-vue3-admin/server/model/example"
 	"github.com/sunyihoo/gin-vue3-admin/server/model/system"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
@@ -33,6 +34,22 @@ func RegisterTable() {
 		//系统模块表
 		system.SysApi{},
 		system.SysUser{},
+		system.SysBaseMenu{},
+		system.JwtBlacklist{},
+		system.SysAuthority{},
+		system.SysDictionary{},
+		system.SysOperationRecord{},
+		system.SysAutoCodeHistory{},
+		system.SysDictionaryDetail{},
+		system.SysBaseMenuParameter{},
+		system.SysBaseMenuBtn{},
+		system.SysAuthorityBtn{},
+		system.SysAutoCode{},
+		system.SysChatCptOption{},
+
+		example.ExaFile{},
+		example.ExaCustomer{},
+		example.ExaFileChunk{},
 	)
 	if err != nil {
 		global.GVA_LOG.Error("register table failed", zap.Error(err))
