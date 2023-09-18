@@ -6,6 +6,7 @@ import (
 	"github.com/sunyihoo/gin-vue3-admin/server/model/system"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
+	"os"
 )
 
 // Gorm 初始化数据库并产生数据库全局变量
@@ -50,9 +51,11 @@ func RegisterTable() {
 		example.ExaFile{},
 		example.ExaCustomer{},
 		example.ExaFileChunk{},
+		example.ExaFileUploadAndDownload{},
 	)
 	if err != nil {
 		global.GVA_LOG.Error("register table failed", zap.Error(err))
+		os.Exit(0)
 	}
 	global.GVA_LOG.Info("register table success")
 }
