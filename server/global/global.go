@@ -22,6 +22,6 @@ var (
 	GVA_Timer               = timer.NewTimerTask()
 	GVA_Concurrency_Control = &singleflight.Group{}
 
-	BlockCache local_cache.Cache
+	BlackCache local_cache.Cache
 	lock       sync.RWMutex
 )

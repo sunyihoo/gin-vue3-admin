@@ -41,5 +41,5 @@ func main() {
 			}
 		}(db)
 	}
-	core.Run
+	core.RunWindowsServer()
 }

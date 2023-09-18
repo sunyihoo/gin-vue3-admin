@@ -13,3 +13,7 @@ type SysAuthority struct {
 	Children        []SysAuthority  `json:"children" gorm:"-"`
 	SysBaseMens     []SysBaseMenu   `json:"menus" gorm:"many2many:sys_user_authority_menus"`
 }
+
+func (SysAuthority) TableName() string {
+	return "sys_authorities"
+}
